@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game</title>
+</head>
+
+<body>
+
+  <div id="game">
+        <h1> The Psychic Game </h1>
+      <header>Guess what letter I'm thinking:</header>
+    <p>Wins:</p>
+	<p>Losses:</p>
+	<p>Guesses Left:</p>
+	<p>Your Guesses so far:</p>
+  </div>
+
+  <script type="text/javascript">
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+    var wins = 0;
+    var losses = 0;
+    var numberofguesses = 9;
+    var guessespicked = []
+
+
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+
+      // Determines which key was pressed.
+      var userGuess = event.key;
+
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      var picks = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+      // Only run the following code block if the user presses "r" or "p" or "s".
+      if (userGuess === computerGuess) {
+          wins++;
+          numberofguesses = 9;
+          guessespicked = [];
+      }
+       if (userGuess != computerGuess) {
+           numberofguesses --;
+           guessespicked.push(userGuess);
+     }
+     if (numberofguesses === 0) {
+          numberofguesses = 9;
+          losses ++;
+          guessespicked = [];
+     }
+        // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+        var html =
+        "<h1> The Psychic Game </h1>" +
+      "<header>Guess what letter I'm thinking:</header>" +
+          "<p>wins: " + wins + "</p>" +
+          "<p>losses: " + losses + "</p>" +
+          "<p>Guesses Left: " + numberofguesses + "</p>" +
+          "<p>Your Guesses so far: " + guessespicked.join(", ") + "</p>";
+
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+      }
+    ;
+  </script>
+
+</body>
+
+</html>
